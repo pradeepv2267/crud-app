@@ -1,0 +1,26 @@
+.main{
+    margin: 0px;
+    border: 0px;
+    background-color: aquamarine; 
+    height: 100vh; 
+}
+
+.Main-Div2{
+    
+    margin: 100px;
+    padding: 15px;
+    height: 500px;
+    border: 1px solid red;
+    display: inline-flexbox;
+    
+}
+
+/* .Row{
+    padding: 15px;
+    margin: 5px;
+       
+    
+} */
+.content{
+    margin-top: 60px;
+}
