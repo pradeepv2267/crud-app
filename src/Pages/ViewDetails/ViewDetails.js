@@ -14,9 +14,6 @@ const ViewDetails = () => {
         <Card.Subtitle className="mb-2 text-muted">Age : {item.age}</Card.Subtitle>
         <Card.Subtitle className="mb-2 text-muted">Gender : {item.Gender}</Card.Subtitle>
         <Card.Subtitle className="mb-2 text-muted">User ID : {item.Email}</Card.Subtitle>
-        
-        {/* <Button variant="outline-success" onClick={()=>editUserData(user.id)} >EDIT</Button>
-        <Button variant="outline-success" onClick={()=>deleteUserData(user.id)}>DELETE</Button> */}
         </Card.Body>
     </Card>
 
