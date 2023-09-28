@@ -1,0 +1,13 @@
+.Button{
+    background-color: transparent;
+    border: none;
+    border-radius: 15px;
+    color: black;
+    
+}
+.Button:hover{
+    background-color: transparent;
+    box-shadow: 1px 1px 2px;
+    color: rgb(11, 2, 48);
+} 
+

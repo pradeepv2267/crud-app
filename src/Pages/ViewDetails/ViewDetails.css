@@ -1,0 +1,21 @@
+.ViewDetails{
+    /* display: grid; */
+    margin: 0px;
+    border: 0px;
+    background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12);
+    height: 100vh; 
+}
+
+.card{
+    background-color: transparent !important;
+    width: 400px;
+    height: 400px;
+    margin-top: 1rem;
+    
+}
+
+.cardDetails{
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit , minmax(340px, 1fr));
+}
