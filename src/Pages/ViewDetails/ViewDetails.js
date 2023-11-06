@@ -36,19 +36,6 @@ const ViewDetails = () => {
           getDetails()
         }
       )
-      // try {
-      //   const res = await fetch(`https://6516e62e09e3260018ca74cb.mockapi.io/:${studentId}`, {
-      //     method:"DELETE"
-      //   });
-      //   const data = await res.json()
-      //   console.log(data)
-
-      //     const removedStudent = datas.filter(student=>student.id !== studentId);
-      //     setDatas(removedStudent)
-        
-      // } catch (error) {
-      //   console.log(error)
-      // }
     }
 
   return (

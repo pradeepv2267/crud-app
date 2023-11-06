@@ -4,7 +4,7 @@ import './AddDetails.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from '../../NavBar/NavBar';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom';
-import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 // const createContxt = createContxt()
 
@@ -15,7 +15,6 @@ const AddDetails = (props) => {
   
     const [isEdit,setIsEdit] = useState(false)
     const[AddData,setData] = useState([])
-    const[id,setID] = useState("");
     const[name,setName] = useState("");
     const[age,setAge] = useState("");
     const[email,setEmail] = useState("");
@@ -24,7 +23,6 @@ const AddDetails = (props) => {
     const[dob,setDob] = useState("");
     const[Update,setUpdate] = useState(false);
 
-    const {ID} = useParams();
 
 
     const AddUser = async (event)=>{
@@ -63,9 +61,9 @@ const AddDetails = (props) => {
 
 
 
-    const editDetails = (ID)=>{
+    const editDetails = (id)=>{
       setIsEdit(!isEdit)   
-      let editData = AddData[ID]? AddData[ID] : ''
+      let editData = AddData[id]? AddData[id] : ''
       // setID(editData.id)
       setAge(editData.age)
       setDob(editData.dob)
