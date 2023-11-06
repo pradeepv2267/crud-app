@@ -16,21 +16,21 @@ const NavBar = () => {
         <Nav className="me-auto">
         <ul className="nav nav-items">
             <li className="nav nav-items">
-            <button  onClick={()=>history.push("/AddDetails")} className="Button" >
+            <button  onClick={()=>history.push("/")} className="Button" >
             <span></span>
-            <span>AddDetails</span>
+            <span>Home</span>
         </button>
             </li>
             <li  className="nav nav-items">
             <button variant="outline-info" onClick={()=>history.push("/ViewDetails")}  className="Button">
             <span></span>
-            <span>/ViewDetails</span>
+            <span>ViewDetails</span>
         </button>
             </li>
             <li className="nav nav-items">
-            <button variant="outline-info" className="Button">
+            <button variant="outline-info" className="Button" onClick={()=>history.push("/AddDetails")} >
             <span></span>
-            <span>Add Student</span>
+            <span>AddDetails</span>
         </button>
             </li>
             <li className="nav nav-items">

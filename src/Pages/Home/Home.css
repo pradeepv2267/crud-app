@@ -1,0 +1,13 @@
+.home{
+    margin: 0px;
+    border: 0px;
+    background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12);
+    height: 100vh; 
+}
+
+h1{
+    font-weight: bolder;
+    font-style: italic  ;
+    color: gold;
+
+}
