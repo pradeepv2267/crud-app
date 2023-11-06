@@ -1,4 +1,4 @@
-import React,{ useEffect, useState,Suspense } from 'react';
+import React,{ useEffect, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import ViewDetails from './Pages/ViewDetails/ViewDetails';
@@ -8,8 +8,6 @@ import Home from './Pages/Home/Home';
 
 import AddDetails from './Pages/AddDetails/AddDetails';
 
-// const AddDetails = lazy(() => import('./Pages/AddDetails/AddDetails'));
-// const ViewDetails = lazy(() => import('./Pages/AddDetails/ViewDetails'));
 
 
 
