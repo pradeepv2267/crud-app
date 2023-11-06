@@ -32,7 +32,6 @@ const ViewDetails = () => {
       const response =   fetch(`https://6516e62e09e3260018ca74cb.mockapi.io/details/${studentId}`, { method: 'DELETE' })
       response.then(
         (data)=>{
-          const repData = data.response
           getDetails()
         }
       )

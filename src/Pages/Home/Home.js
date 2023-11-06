@@ -1,7 +1,6 @@
 import React from 'react';
 import '../Home/Home.css';
-import { Col, Container, Image, Row } from 'react-bootstrap'
-import Welcome from "../Home/Welcome.jpg.png";
+import { Col, Container } from 'react-bootstrap'
 const Home = () => {
   return (
     <div className='home'>

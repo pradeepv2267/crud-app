@@ -94,7 +94,7 @@ const AddDetails = (props) => {
 
 
 
-  const UpdateUserDetails = () =>{
+  const UpdateUserDetails = (id) =>{
     const Updateobject = {
         name: name,
         age : age,
@@ -104,7 +104,7 @@ const AddDetails = (props) => {
         password : password 
     }
 
-    fetch(`https://6516e62e09e3260018ca74cb.mockapi.io//details/${ID}`, {
+    fetch(`https://6516e62e09e3260018ca74cb.mockapi.io//details/${id}`, {
       method: "PUT",
       body: JSON.stringify(Updateobject),
       headers: {
@@ -127,6 +127,7 @@ const AddDetails = (props) => {
         editDetails(editId)
         console.log(location.state);
       }
+      //eslint-disable-next-line
     },[])
     
     
@@ -189,7 +190,7 @@ const AddDetails = (props) => {
                 <Form.Label>Password</Form.Label>
                 <Form.Control type="password" placeholder="Enter the Password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
                 </Row></Col>
-                {Update ? <Button className="mb-3" size="lg" variant="outline-warning" onClick={UpdateUserDetails}>Update</Button> : <Button className="mb-3" size="lg" variant="outline-warning" onClick={AddUser}>Save</Button>}
+                {Update ? <Button className="mb-3" size="lg" variant="outline-warning" onClick={()=>UpdateUserDetails(location.state.id)}>Update</Button> : <Button className="mb-3" size="lg" variant="outline-warning" onClick={AddUser}>Save</Button>}
         
       {/* </Card.Body>
     </Card>        */}
