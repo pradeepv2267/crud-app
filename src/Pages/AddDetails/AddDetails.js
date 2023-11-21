@@ -1,27 +1,41 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap'
+import { Button, Card, Col, Container, Row } from 'react-bootstrap'
 import './AddDetails.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from '../../NavBar/NavBar';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import Toaster from '../../Toaster/Toaster';
 
-// const createContxt = createContxt()
+// const getvalid = () =>{
+//   const valid = {
+//     name : false,
+//     years : false,
+//     email : false,
+//     password : false,
+//     gender : false,
+//     dob : false,
 
+
+//   }
+// }
 
 const AddDetails = (props) => {
   const history = useHistory();
-  const location = useLocation()
+  const location = useLocation();
   
-    const [isEdit,setIsEdit] = useState(false)
-    const[AddData,setData] = useState([])
+    const [isEdit,setIsEdit] = useState(false);
+    const[AddData,setData] = useState([]);
     const[name,setName] = useState("");
-    const[age,setAge] = useState("");
+    const[years,setYears] = useState("");
     const[email,setEmail] = useState("");
     const[password,setPassword] = useState("");
     const[gender,setGender] = useState("");
     const[dob,setDob] = useState("");
     const[Update,setUpdate] = useState(false);
+    const[message,setMessage] = useState("");
+    const[showToast,setShowToast] = useState(false);
+    // const [isValid,setIsValid] = useState(getvalid())
 
 
 
@@ -30,13 +44,13 @@ const AddDetails = (props) => {
       try{
         const newUser ={
           name,
-          age,
+         age: years,
           password,
           gender,
           dob,
           email
   }
-  const response = await fetch("https://6516e62e09e3260018ca74cb.mockapi.io//details",{
+  const response = await fetch("https://6516e62e09e3260018ca74cb.mockapi.io/details",{
     method: "POST",
     body: JSON.stringify(newUser),
     headers: {'Content-Type': 'application/json'},
@@ -45,13 +59,14 @@ const AddDetails = (props) => {
   const data = await response.json
 
   setData([...AddData,data])
-  setAge("")
+  setYears("")
   setDob("")
   setGender("")
   setName("")
   setPassword("")
   setEmail("")
-  history.push("/ViewDetails")
+  setShowToast(true)
+  setMessage("Details Added Successfully") 
       }catch (error){
 
       }
@@ -61,19 +76,17 @@ const AddDetails = (props) => {
 
 
 
-    const editDetails = (id)=>{
+    const editDetails = (data)=>{
+      if(data){
       setIsEdit(!isEdit)   
-      let editData = AddData[id]? AddData[id] : ''
-      // setID(editData.id)
-      setAge(editData.age)
-      setDob(editData.dob)
-      setGender(editData.gender)
-      setName(editData.name)
-      setPassword(editData.password)
-      setEmail(editData.Email)
-      setUpdate(true)
-
-          
+      setYears(data.years)
+        setDob(data.dob)
+        setGender(data.gender)
+        setName(data.name)
+        setPassword(data.password)
+        setEmail(data.email)  
+      setUpdate(true)     
+    }
     }
 
     useEffect(()=>{
@@ -84,7 +97,9 @@ const AddDetails = (props) => {
           })
          const data = await response.json()
          setData(data)
+         //eslint-disable-next-line
         }catch(e){
+          console.log(e);
 
         }
       }
@@ -93,38 +108,43 @@ const AddDetails = (props) => {
     },[])
 
 
+    const getDetails = async (id) =>{
+      const response = await fetch(`https://6516e62e09e3260018ca74cb.mockapi.io/details/${id}`,{
+        method: 'GET',
+      })
+      const data = await response.json()
+      editDetails(data)
+    }
+
+
 
   const UpdateUserDetails = (id) =>{
     const Updateobject = {
         name: name,
-        age : age,
+        years : years,
         gender : gender,
         dob : dob,
         email : email,
         password : password 
     }
 
-    fetch(`https://6516e62e09e3260018ca74cb.mockapi.io//details/${id}`, {
+    fetch(`https://6516e62e09e3260018ca74cb.mockapi.io/details/${id}`, {
       method: "PUT",
       body: JSON.stringify(Updateobject),
       headers: {
         "Content-Type": "application/json"
       },
     })
-      .then((data) => data.json())
+      .then((data) => data.json()
+      )
       history.push('/ViewDetails')
 
+  } 
 
-
-  }
-    
-    
-    
     
     useEffect(()=>{
-      if(location.state){
-        let editId = location.state ? location.state.id : ''; 
-        editDetails(editId)
+      if(location?.state){
+        getDetails(location.state.id)
         console.log(location.state);
       }
       //eslint-disable-next-line
@@ -138,64 +158,59 @@ const AddDetails = (props) => {
     <div className='main'>
 
 <NavBar/>
-     <Container key={age}>
+     <Container key={name}>
       <Row>
         <Col md="12" className='mt-5'>
-        {/* <Card auto>
-      <Card.Body >
-        <Card.Title></Card.Title> */}
                   <Card.Header><h1>Create Profile</h1></Card.Header>
 
         <Col md='5 mx-auto'>
             <Row className="mb-3 ">
-                <Form.Label>Name</Form.Label>
-                <Form.Control type="text" placeholder="Enter Your Name" value={name} onChange={(e)=>setName(e.target.value)}/>
+              <label>Name</label>
+              <input type='text' className='p-2' value={name} style={{backgroundColor : "white", borderRadius : "10px", border : "none"}}  placeholder="Enter Your Name"  onChange={(e)=>setName(e.target.value)} />
                 </Row></Col>
         <Col md='5 mx-auto'>
             <Row className="mb-3 ">
-                <Form.Label>Email</Form.Label>
-                <Form.Control type="text" placeholder="Enter Your Email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
+                <label>Email</label>
+                <input type="text" placeholder="Enter Your Email" className='p-2' style={{backgroundColor : "white", borderRadius : "10px", border : "none"}} value={email} onChange={(e)=>setEmail(e.target.value)}/>
                 </Row></Col>
         <Col md='5 mx-auto'>
         <Row className="mb-3 ">
-        <Form.Group as={Col}  controlId="formGridState">
-          <Form.Label  >Select Gender</Form.Label>
-          <Form.Select value={gender} defaultValue="Choose..." onChange={(e)=>setGender(e.target.value)}>
+          <label  >Select Gender</label>
+          <select value={gender} className='p-2' style={{backgroundColor : "white", borderRadius : "10px", border : "none"}} defaultValue="Choose..." onChange={(e)=>setGender(e.target.value)}>
           <option>Gender</option>
             <option>Male</option>
             <option>Female</option>
             <option>Others</option>
-          </Form.Select>
-        </Form.Group>   
+          </select>
         </Row>
         </Col>   
+        <Col md='5 mx-auto'>
+            <Row className="mb-3 ">
+                <label>Age</label>
+            <input type="text" placeholder="Enter Your Age" className='p-2' style={{backgroundColor : "white", borderRadius : "10px", border : "none"}} value={years} onChange={(e)=>setYears(e.target.value)}/>
+
+            </Row>
+            </Col>
             
         <Col md='5 mx-auto'>
             <Row className="mb-3 ">
-                <Form.Label>D.O.B</Form.Label>
-            <Form.Control type="text" placeholder="Enter D.O.B" value={dob} onChange={(e)=>setDob(e.target.value)}/>
+                <label>D.O.B</label>
+            <input type="text" placeholder="Enter D.O.B" className='p-2' style={{backgroundColor : "white", borderRadius : "10px", border : "none"}} value={dob} onChange={(e)=>setDob(e.target.value)}/>
             </Row></Col>
         <Col md='5 mx-auto'>
             <Row className="mb-3 ">
-                <Form.Label>Age</Form.Label>
-            <Form.Control type="text" placeholder="Enter Your Age" value={age} onChange={(e)=>setAge(e.target.value)}/>
-            </Row></Col>
-        {/* <Col md='5 mx-auto'>
-            <Row className="mb-3 ">
-                <Form.Label>id</Form.Label>
-                <Form.Control type="text" placeholder="Enter ID" value={id} onChange={(e)=>setID(e.target.value)}/>
-                </Row></Col> */}
-        <Col md='5 mx-auto'>
-            <Row className="mb-3 ">
-                <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Enter the Password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
+                <label>Password</label>
+                <input type="password" placeholder="Enter the Password" className='p-2' style={{backgroundColor : "white", borderRadius : "10px", border : "none"}} value={password} onChange={(e)=>setPassword(e.target.value)}/>
                 </Row></Col>
                 {Update ? <Button className="mb-3" size="lg" variant="outline-warning" onClick={()=>UpdateUserDetails(location.state.id)}>Update</Button> : <Button className="mb-3" size="lg" variant="outline-warning" onClick={AddUser}>Save</Button>}
         
-      {/* </Card.Body>
-    </Card>        */}
+
         </Col>
       </Row>
+      <Toaster
+      Message={message}
+      show={showToast}
+      />
     </Container>
     </div>
   

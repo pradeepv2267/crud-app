@@ -28,7 +28,7 @@ function App() {
   
   useEffect(()=>{
     getDetails()
-    
+    //eslint-disable-next-line
   },[]);
 
 
