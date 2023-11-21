@@ -158,7 +158,7 @@ const AddDetails = (props) => {
     <div className='main'>
 
 <NavBar/>
-     <Container key={name}>
+     <Container key={1}>
       <Row>
         <Col md="12" className='mt-5'>
                   <Card.Header><h1>Create Profile</h1></Card.Header>
